@@ -19,6 +19,8 @@ some important bit of information for it to work out as originally intended.
 
 The questions in the survey are a guide to start and structure *a dialog* between both parties which might eventually
 not even require additional prompting by any survey. In that regard, this tools purpose is to make itself unnecessary.
+This also means that this is not a psychological survey: I intentionally left out some patterns that are meant to filter
+out bias or disingenuous answers. This helps to keep things short.
 
 ## Project setup
 ```

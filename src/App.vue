@@ -20,6 +20,29 @@ function genitiveName(params: any[]): string | null {
 }
 SurveyVue.FunctionFactory.Instance.register("genitiveName", genitiveName);
 
+const COMPARABLE_RATING = [
+  {
+    value: 1,
+    text: "Untere 10%"
+  },
+  {
+    value: 2,
+    text: "Untere 30%"
+  },
+  {
+    value: 3,
+    text: "Mittlere 30%"
+  },
+  {
+    value: 4,
+    text: "Obere 30%"
+  },
+  {
+    value: 5,
+    text: "Obere 10%"
+  }
+];
+
 function questions() {
   return [
     {
@@ -63,28 +86,7 @@ function questions() {
           name: "project_overall",
           valueName: "overall",
           isRequired: true,
-          rateValues: [
-            {
-              value: 1,
-              text: "Untere 10%"
-            },
-            {
-              value: 2,
-              text: "Untere 30%"
-            },
-            {
-              value: 3,
-              text: "Mittlere 30%"
-            },
-            {
-              value: 4,
-              text: "Obere 30%"
-            },
-            {
-              value: 5,
-              text: "Obere 10%"
-            }
-          ]
+          rateValues: COMPARABLE_RATING
         },
         {
           type: "text",
@@ -102,6 +104,86 @@ function questions() {
           name: `project_improvement`,
           valueName: "improvement",
           requiredIf: "{panel.overall} < 4"
+        }
+      ]
+    },
+    {
+      type: "text",
+      name: "success_story",
+      title:
+        "Welches Problem habt ihr gemeinsam erfolgreich gemeistert und was hat diesen Erfolg möglich gemacht?"
+    },
+    {
+      type: "matrix",
+      name: "general_skills",
+      title:
+        "Wie gut schlägt sich {name} in Bezug auf die folgenden Eigenschaften?",
+      columns: COMPARABLE_RATING,
+      rows: [
+        { value: "ethics", text: "Hält ethische Standards hoch" },
+        { value: "learning_from_mistakes", text: "Lernt aus Fehlern" },
+        { value: "customer_needs", text: "Auf Kunden-Bedürfnisse fokussiert" },
+        { value: "problem_solving", text: "Lösungs-orientiert" }
+      ]
+    },
+    {
+      type: "matrix",
+      name: "collaboration",
+      title: "Noch ein paar Punkte zur Zusammenarbeit",
+      columns: COMPARABLE_RATING,
+      rows: [
+        {
+          value: "inspires_learning",
+          text:
+            "Inspiriert andere, zu lernen, besser zu werden und ihre Ziele zu erreichen"
+        },
+        {
+          value: "conflict_solution",
+          text: "Löst Konflikte auf angemessene Art, auch aus Eigen-Initiative"
+        },
+        {
+          value: "effective_communication",
+          text: "Kommuniziert offen & effektiv"
+        },
+        {
+          value: "giving_feedback",
+          text: "Gibt konstruktives und hilfreiches Feedback"
+        },
+        {
+          value: "open_to_innovation",
+          text: "Ist offen für Innovation & Veränderung"
+        }
+      ]
+    },
+    {
+      type: "rating",
+      name: "contribution_to_success",
+      title: "{name} hilft mir, meinen Job gut zu machen",
+      rateValues: [
+        { value: 0, text: "Überhaupt nicht" },
+        { value: 1, text: "Ein wenig" },
+        { value: 2, text: "Okay-ish" },
+        { value: 3, text: "Gut" },
+        { value: 4, text: "Sehr gut" }
+      ]
+    },
+    {
+      type: "rating",
+      name: "representativeness",
+      title:
+        "Wie viele Leute vom Rest des Teams, denkst Du, teilen Deine Einschätzung von {name}?",
+      rateValues: [
+        {
+          value: 1,
+          text: "Kaum einer"
+        },
+        {
+          value: 2,
+          text: "Einige"
+        },
+        {
+          value: 3,
+          text: "Die meisten"
         }
       ]
     }
