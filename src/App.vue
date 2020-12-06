@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <Survey :survey="survey"></Survey>
+  <div id="app" style="display: flex; justify-content: center;">
+    <Survey :survey="survey" style="max-width: 600px"></Survey>
   </div>
 </template>
 
@@ -10,6 +10,7 @@ import * as SurveyVue from "survey-vue";
 
 import "bootstrap/dist/css/bootstrap.css";
 (SurveyVue.Survey as any).cssType = "bootstrap";
+SurveyVue.StylesManager.applyTheme("bootstrap");
 
 function genitiveName(params: any[]): string | null {
   const name = params[0];
@@ -51,6 +52,19 @@ function questions() {
       isRequired: true,
       valueName: "name",
       title: "Für wen ist dieses Feedback?"
+    },
+    {
+      type: "html",
+      name: "introduction",
+      html:
+        "<h4>Wie funktioniert das Feedback?</h4>" +
+        "<p>Diese Umfrage ist dazu gedacht, Dir zu helfen, {name} Feedback zu geben, dass ihm/ihr hilft, seine/ihre " +
+        "Rolle möglichst gut auszufüllen. Benutze es, um Dir Gedanken zu machen und Notizen festzuhalten.</p>" +
+        '<p>Danach kannst Du über die "Drucken"-Funktion des Browsers ein PDF erstellen und im persönlichen Gespräch ' +
+        "mit {name} diskutieren.</p>" +
+        "<p><b>Tipp:</b> die Bewertung sollte immer in Relation zur Rolle im Team erfolgen. Der Dialog soll {name} helfen, " +
+        "diese möglichst gut auszufüllen und sich zu verbessern. Offenes und konstruktives Feedback zu geben ist nicht " +
+        "leicht, aber wenn Du Dir etwas Zeit nimmst, hilft es Dir, in Zukunft kontinuierlich eure Arbeit zu verbessern</p>"
     },
     {
       type: "matrixdynamic",
@@ -171,7 +185,7 @@ function questions() {
       type: "rating",
       name: "representativeness",
       title:
-        "Wie viele Leute vom Rest des Teams, denkst Du, teilen Deine Einschätzung von {name}?",
+        "Wie viele im Team, denkst Du, teilen Deine Einschätzung von {name}?",
       rateValues: [
         {
           value: 1,
