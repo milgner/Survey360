@@ -222,6 +222,7 @@ function questions() {
 
     //Create the model and pass it into VueSJ Survey component
     const model = new SurveyVue.Model(json);
+    model.onComplete.add(() => window.print());
     //You may set model properties
     // model.mode="display"
 
